@@ -1,0 +1,480 @@
+/*
+To customize the look and feel of Ionic, you can override the variables
+in ionic's _variables.scss file.
+
+For example, you might change some of the default colors:
+
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #387ef5 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+*/
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 300;
+    src: url('../fonts/open-sans/OpenSans-Light-webfont.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/open-sans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/open-sans/OpenSans-Semibold-webfont.ttf') format('truetype');
+    unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/open-sans/OpenSans-Bold-webfont.ttf') format('truetype');
+    unicode-range: U+0460-052F, U+20B4, U+2DE0-2DFF, U+A640-A69F;
+}
+
+body * {
+    font-family: 'Open Sans', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+ion-content {
+    color: #464a52;
+}
+
+.alert-message {
+    color: #8a6d3b;
+    background-color: #fcf8e3;
+    border: 1px solid #faebcc;
+    display: block;
+    margin-top: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.spinner svg {
+    width: 28px;
+    height: 28px;
+    stroke: #fff;
+    fill: #fff;
+}
+
+.bar {
+    &.bar-garagem {
+        height: 54px !important;
+
+        @extend .bar-dark;
+
+        .title {
+            color: #fff;
+            height: 54px;
+            line-height: 54px;
+            text-transform: uppercase;
+        }
+    }
+}
+
+[nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
+    background-color: #646f75 !important;
+    border: none;
+    color: #fff;
+}
+
+.has-header {
+    top: 54px;
+}
+
+.popover {
+    height: 111px;
+
+    .has-header {
+        top: 0;
+    }
+}
+
+.footer-garagem {
+    @extend .bar-light;
+
+    border: none;
+    height: 80px;
+    padding: 0;
+}
+
+.pull-right {
+    position: absolute;
+    right: 10px;
+}
+
+.bg-garage {
+    background: url('../img/bg.jpg') no-repeat 50%;
+    background-size: cover;
+    color: #fff;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+
+    .box {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.client-photo {
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 100%;
+    display: inline-block;
+    height: 20vw;
+    margin-bottom: 10px;
+    width: 20vw;
+}
+
+.text-shadow {
+    text-shadow: 0 0 2px rgba(103, 144, 151, 1);
+}
+
+#home {
+    padding: 7.5vh 8vw;
+    text-align: center;
+
+    .description {
+        height: 10vh;
+        font-size: 1.3em;
+        line-height: 1em;
+    }
+
+    .buttons {
+        height: 40vh;
+
+        button {
+            color: #fff;
+            margin-bottom: 5vw;
+        }
+
+        .button-signin {
+            background-color: #3aa0f7;
+        }
+
+        .button-signup {
+            background-color: #bfbfbf;
+        }
+    }
+
+    .disclaimer {
+        font-size: .8em;
+        vertical-align: bottom;
+        height: 5vh;
+        width: 100%;
+    }
+}
+
+#signin {
+    padding: 7.5vh 8vw;
+    text-align: center;
+
+    input {
+        background-color: transparent;
+        border-bottom: .3vh solid #fff;
+        box-sizing: border-box;
+        color: #fff;
+        font-size: 18px;
+        margin-bottom: 2vw;
+        padding: 25px 20px;
+        width: 100%;
+    }
+
+    .description {
+        height: 10vw;
+    }
+
+    .button-signin {
+        background-color: #3aa0f7;
+        color: #fff;
+        margin-top: 20vw;
+    }
+
+    ::-webkit-input-placeholder {
+        color: #fff;
+        font-size: 18px;
+        padding: 4px 0;
+        text-transform: uppercase;
+    }
+
+    :-moz-placeholder {
+        color: #fff;
+    }
+
+    ::-moz-placeholder {
+        color: #fff;
+    }
+
+    :-ms-input-placeholder {
+        color: #fff;
+    }
+}
+
+#logo {
+    background: url('../img/logo.png') no-repeat 50%;
+    background-size: contain;
+    overflow: hidden;
+    height: 25vh;
+    margin: 0 auto 5vh;
+    text-indent: -90000px;
+}
+
+#logo-small {
+    background: url('../img/logo-small.png') no-repeat 50%;
+    background-size: contain;
+    overflow: hidden;
+    height: 66%;
+    margin: 8px 0px;
+    text-indent: -90000px;
+}
+
+#logged-home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .client-info {
+        font-size: 1.2em;
+        line-height: 1.5em;
+
+    }
+
+    .box {
+        box-sizing: border-box;
+        text-align: center;
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    .home-option {
+        border: none;
+        border-bottom: 5px solid #fff;
+        color: #fff;
+
+        h2 {
+            color: #fff;
+            display: block;
+            margin-bottom: 0;
+        }
+    }
+}
+
+#sell-option {
+    background: url('../img/home/bg-sell.png') no-repeat 50%;
+    background-size: cover;
+}
+
+#my-garage-option {
+    background: url('../img/home/bg-garage.png') no-repeat 50%;
+    background-size: cover;
+}
+
+#my-garage {
+    .header {
+        flex: 1;
+        font-size: 18px;
+        justify-content: flex-start;
+
+        .client-photo {
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
+    }
+
+    .nav {
+        align-items: flex-start;
+        flex: 1;
+
+        ul {
+            border-bottom: .4vh solid #bfbfbf;
+            display: table;
+            width: 100%;
+
+            li {
+                display: table-cell;
+                position: relative;
+                text-align: center;
+
+                &:after {
+                    border-right: .3vw solid #bfbfbf;
+                    content: ' ';
+                    height: 30%;
+                    margin-top: -8%;
+                    position: absolute;
+                    right: -.15vw;
+                    top: 50%;
+                    z-index: 3;
+                }
+
+                &:last-child:after {
+                    display: none;
+                }
+
+                .item {
+                    border: none;
+                    margin: 0;
+
+                    &.active {
+                        background-color: transparent;
+                        border-bottom: .5vh solid #3aa0f7
+                    }
+
+                    &.activated {
+                        background-color: #fff;
+                    }
+                }
+
+                .count {
+                    display: block;
+                    font-size: 1.5em;
+                    line-height: 1.6em;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+
+    .products {
+        align-items: flex-start;
+        flex: 4;
+
+        .row {
+            flex-wrap: wrap;
+        }
+
+        .product {
+            .image {
+                background-repeat: no-repeat;
+                background-size: cover;
+                display: block;
+                padding-bottom: 100%;
+                width: 100%;
+            }
+
+            .name {
+                text-overflow: ellipsis;
+            }
+
+            .price {
+                font-weight: bold;
+            }
+        }
+
+        .spinner {
+            svg {
+                width: 28px;
+                height: 28px;
+                stroke: #646f75;
+                fill: #646f75;
+            }
+        }
+    }
+}
+
+#photo-list {
+    li {
+        text-align: center;
+
+        .placeholder {
+            background-size: cover;
+            background-position: 50%;
+            box-sizing: border-box;
+            display: block;
+            height: 0;
+            margin: 0 auto;
+            padding-bottom: 95%;
+            position: relative;
+            max-width: 95%;
+        }
+
+        .photo-remove {
+            background-color: #fff;
+            border-radius: 100%;
+            padding: 0;
+            position: absolute;
+            right: -12px;
+            line-height: 1;
+            min-height: 27px;
+            min-width: 27px;
+            top: -12px;
+
+            &:before {
+                line-height: 1;
+            }
+        }
+
+        .photo-add {
+            background-color: #d2d0d0;
+            border-radius: 0;
+            display: block;
+            line-height: 100%;
+            min-height: 100%;
+            padding: 0;
+            position: absolute;
+            width: 100%;
+
+            &:before {
+                line-height: 100%;
+                font-size: 6vw;;
+            }
+        }
+    }
+}
+
+#product-info {
+    .photo-slide {
+        img {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .slider-pager .slider-pager-page {
+        color: #fff;
+    }
+
+    textarea[name="description"] {
+        height: 100px;
+    }
+
+    button[type="submit"] {
+        border-radius: 0;
+    }
+
+    //.ng-invalid {
+    //    textarea, input {
+    //        border-left: 2px solid red;
+    //    }
+    //}
+}
+
