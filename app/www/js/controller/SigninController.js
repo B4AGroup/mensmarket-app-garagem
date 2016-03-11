@@ -14,9 +14,9 @@ angular.module('garagem').controller('SigninController', function ($scope, $stat
         $scope.loading = false;
 
         if (errorCode === 0) {
-            navigator.notification.alert('Usuário ou senha estão incorretos');
+            navigator.notification.alert('Usuário ou senha estão incorretos', null, 'Ops! :(');
         } else {
-            navigator.notification.alert('Ocorreu um erro ao tentar efetuar o login. Por favor, tente novamente');
+            navigator.notification.alert('Ocorreu um erro ao tentar efetuar o login. Por favor, tente novamente', null, 'Ops! :(');
         }
     }
 

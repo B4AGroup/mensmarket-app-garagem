@@ -72,13 +72,13 @@ angular.module('garagem')
                 ProductService.upsert(newProduct).then(function () {
                     $ionicLoading.hide();
 
-                    navigator.notification.alert('Seu produto foi enviado com sucesso!');
-
-                    $state.go('logged-home');
+                    navigator.notification.alert('Seu produto foi enviado com sucesso.', function() {
+                        $state.go('logged-home');
+                    }, 'Sucesso!');
                 }, function (err) {
                     $ionicLoading.hide();
 
-                    navigator.notification.alert('Ocorreu um erro ao tentar enviar seu produto. Por favor, tente novamente.');
+                    navigator.notification.alert('Ocorreu um erro ao tentar enviar seu produto. Por favor, tente novamente.', null, 'Ops! :(');
                 });
             }, function (err) {
                 console.error(err);

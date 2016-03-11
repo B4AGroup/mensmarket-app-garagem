@@ -16,7 +16,7 @@ angular.module('garagem').controller('SignupController', function ($scope, $stat
         $ionicLoading.hide();
 
         if (message) {
-            navigator.notification.alert(message);
+            navigator.notification.alert(message, null, 'Ops! :(');
         }
     }
 
