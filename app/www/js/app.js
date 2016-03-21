@@ -5,71 +5,159 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-document.addEventListener("deviceready", function () {
 
-    // cordova-HTTP code goes here
-}, false);
+angular.module('garagem', ['ionic', 'ui.utils.masks', 'ngAnimate', 'ngPassword']).run(function ($rootScope, $ionicPlatform, $ionicHistory, $state, $ionicViewSwitcher, ClientService) {
+    $ionicPlatform.registerBackButtonAction(function () {
+        var currentStateName = $ionicHistory.currentStateName();
 
-angular.module('garagem', ['ionic', 'ui.utils.masks', 'ngAnimate', 'ngPassword']).run(function ($ionicPlatform, $rootScope) {
+        switch (currentStateName) {
+            case 'home':
+            case 'logged-home':
+                navigator.app.exitApp();
+                break;
+
+            case 'success':
+            case 'product-photo':
+                $ionicViewSwitcher.nextDirection('back');
+                $state.go('logged-home');
+                break;
+
+            default:
+                $ionicHistory.goBack(-1);
+                break;
+        }
+    }, 100);
+
+    $rootScope.$on('$ionicView.beforeEnter', function (event) {
+        event.preventDefault();
+
+        if ($state.$current.data && $state.$current.data.requiredClient && !ClientService.isLoggedIn()) {
+            $ionicViewSwitcher.nextDirection('none');
+            $state.go('home')
+        }
+    });
+
     $ionicPlatform.ready(function () {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-            cordova.plugins.Keyboard.disableScroll(true);
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+            cordova.plugins.Keyboard.disableScroll(false);
         }
 
         if (window.StatusBar) {
-            StatusBar.styleDefault();
+            StatusBar.styleLightContent();
+        }
+
+        $ionicViewSwitcher.nextDirection('none');
+
+        if (!ClientService.isLoggedIn()) {
+            $state.go('home');
+        } else {
+            $state.go('logged-home');
         }
     });
-}).config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+
+}).config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
+        .state('loading', {
+            url: '/loading',
+            templateUrl: 'templates/loading.html'
+        })
+
         .state('home', {
             url: '/home',
-            templateUrl: 'home.html',
-            controller: 'HomeController'
+            templateUrl: 'templates/home.html',
+            controller: 'HomeController',
+            cache: false
         })
 
         .state('signin', {
             url: '/signin',
-            templateUrl: 'signin.html',
-            controller: 'SigninController'
+            templateUrl: 'templates/signin.html',
+            controller: 'SigninController',
+            cache: false
         })
 
         .state('signup', {
             url: '/signup',
-            templateUrl: 'signup.html',
-            controller: 'SignupController'
+            templateUrl: 'templates/signup.html',
+            controller: 'SignupController',
+            cache: false
+        })
+
+        .state('settings', {
+            url: '/settings',
+            templateUrl: 'templates/settings.html',
+            controller: 'SettingsController',
+            data: {
+                requiredClient: true
+            }
+        })
+
+        .state('rules', {
+            url: '/rules',
+            templateUrl: 'templates/rules.html',
+            data: {
+                requiredClient: true
+            }
         })
 
         .state('logged-home', {
             url: '/logged-home',
-            templateUrl: 'logged-home.html',
-            controller: 'LoggedHomeController'
+            templateUrl: 'templates/logged-home.html',
+            controller: 'LoggedHomeController',
+            cache: false,
+            data: {
+                requiredClient: true
+            }
         })
 
         .state('my-garage', {
             url: '/my-garage',
-            templateUrl: 'my-garage.html',
-            controller: 'MyGarageController'
+            templateUrl: 'templates/my-garage.html',
+            controller: 'MyGarageController',
+            cache: false,
+            data: {
+                requiredClient: true
+            }
         })
 
         .state('product-photo', {
             url: '/product-photo',
-            templateUrl: 'product-photo.html',
-            controller: 'PhotoController'
+            templateUrl: 'templates/product-photo.html',
+            controller: 'PhotoController',
+            cache: false,
+            data: {
+                requiredClient: true
+            }
         })
 
         .state('product-category', {
             url: '/product-category',
-            templateUrl: 'product-category.html',
-            controller: 'ProductCategoryController'
+            templateUrl: 'templates/product-category.html',
+            controller: 'ProductCategoryController',
+            cache: false,
+            //data: {
+            //    requiredClient: true
+            //}
         })
 
         .state('product-info', {
             url: '/product-info',
-            templateUrl: 'product-info.html',
-            controller: 'ProductInfoController'
+            templateUrl: 'templates/product-info.html',
+            controller: 'ProductInfoController',
+            cache: false,
+            data: {
+                requiredClient: true
+            }
+        })
+
+        .state('success', {
+            url: '/success',
+            templateUrl: 'templates/success.html',
+            data: {
+                requiredClient: true
+            }
         });
 
-    $urlRouterProvider.otherwise("/home");
+    $urlRouterProvider.otherwise("/loading");
 });

@@ -1,0 +1,22 @@
+<ion-view ng-controller="SettingsController as settings">
+    <ion-nav-title>
+    </ion-nav-title>
+    <ion-content id="settings">
+        <p class="header x-padding">
+            <strong>Não está vendo os seus produtos na loja?</strong>
+            <span>Não se preocupe! Eles estão sendo aprovados por nossos especialistas. Logo logo estarão à venda no site!</span>
+        </p>
+        <ion-list>
+            <ion-item ui-sref="rules">
+                Regras da Garagem
+                <span class="icon ion-chevron-right pull-right"></span>
+            </ion-item>
+        </ion-list>
+        <p class="logout x-padding">
+            <a ng-click="settings.logout()">Quer sair?</a>
+        </p>
+        <p class="garagem-tip text-center">
+            Os seus produtos estarão disponíveis para venda no site: <a href="#" onclick="window.open('https://www.mensmarket.com.br/garagem-da-mens', '_system')">www.mensmarket.com.br/garagem-da-mens</a>
+        </p>
+    </ion-content>
+</ion-view>

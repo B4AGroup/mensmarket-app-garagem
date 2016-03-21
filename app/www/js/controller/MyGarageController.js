@@ -4,7 +4,7 @@
 angular.module('garagem').controller('MyGarageController', function ($scope, $rootScope, $state, $q, ClientService, SolrService) {
 
     var client = $scope.client = ClientService.getClient();
-    var loadProducts = function() {
+    var loadProducts = function () {
         $scope.loading = true;
 
         var promises = [];
@@ -17,13 +17,13 @@ angular.module('garagem').controller('MyGarageController', function ($scope, $ro
             $scope.soldProducts = soldProducts;
         }));
 
-        $q.all(promises).then(function() {
+        $q.all(promises).then(function () {
             $scope.loading = false;
         });
     };
 
     $scope.selectedTab = 'forSaleProducts';
-    $scope.selectTab = function(tab) {
+    $scope.selectTab = function (tab) {
         $scope.selectedTab = tab;
     };
 

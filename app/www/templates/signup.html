@@ -1,0 +1,57 @@
+<ion-view>
+    <ion-nav-title>Criar uma conta</ion-nav-title>
+
+    <ion-content id="signup" overflow-scroll="false">
+        <form name="signup" ng-submit="submit(client)" novalidate>
+            <div id="signup-container" class="flex">
+                <div class="list">
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Nome</span>
+                        <input type="text" placeholder="Ex: João" ng-model="client.name" ng-trim="false"
+                               name="name" ng-required="true">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Sobrenome</span>
+                        <input type="text" placeholder="Ex: Silva" ng-model="client.surname" ng-trim="false"
+                               name="surname" ng-required="true">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Senha</span>
+                        <input type="password" placeholder="*******" ng-model="client.password" ng-trim="false"
+                               name="password"
+                               ng-required="true">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Confirmar senha</span>
+                        <input type="password" match-password="password" placeholder="*******"
+                               ng-model="client.confirmPassword" ng-trim="false"
+                               name="confirmPassword"
+                               ng-required="true">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">E-mail</span>
+                        <input type="text" placeholder="Ex: joao.silva@email.com" ng-model="client.email"
+                               ng-trim="false"
+                               name="email"
+                               ng-required="true">
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">CPF</span>
+                        <input type="text" placeholder="Ex: 000.000.000-00" ng-model="client.cpf" ng-trim="false"
+                               name="cpf"
+                               ng-required="true" ui-br-cpf-mask>
+                    </label>
+                    <label class="item item-input item-stacked-label">
+                        <span class="input-label">Data de nascimento</span>
+                        <input type="text" placeholder="Ex: dd/mm/aaaa" ng-model="client.birth" ng-trim="false"
+                               name="birth"
+                               ng-required="true" ui-date-mask>
+                    </label>
+                </div>
+                <button type="submit" class="button button-block button-positive" ng-disabled="signup.$invalid">Criar
+                    conta
+                </button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>

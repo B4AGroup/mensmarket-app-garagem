@@ -30,14 +30,22 @@ angular.module('garagem')
             getCategories: function () {
                 var q = $q.defer();
 
-                $http.get('http://search.mensmkt.com/solr/categories/select?q=ascendantNamesSlug%3Agaragem-da-mens&wt=json&rows=10000&sort=nameSort+asc').then(function successCallback(response) {
-                    if (response.data && response.data.response) {
-                        var tree = getCategoryTree(response.data.response.docs);
+                window.plugins.CordovaHttpPlugin.acceptAllCerts(true);
+                window.plugins.CordovaHttpPlugin.get('http://search.mensmkt.com/solr/categories/select', {
+                    q: 'ascendantNamesSlug:garagem-da-mens',
+                    wt: 'json',
+                    rows: '10000',
+                    sort: 'nameSort asc',
+                    fq: 'showMenu:true'
+                }, {}, function(response) {
+                    if (response.data) {
+                        var json = JSON.parse(response.data);
+                        var tree = getCategoryTree(json.response.docs);
 
                         q.resolve(tree);
                     }
-                }, function errorCallback(response) {
-                    console.log(response);
+                }, function(err) {
+                    q.reject(err);
                 });
 
                 return q.promise;
@@ -46,13 +54,19 @@ angular.module('garagem')
             getSoldProducts: function(client) {
                 var q = $q.defer();
 
-                //$http.get('http://search.mensmkt.com/solr/products/select?q=attr_value_garagem-id-do-usuario:22698&fq=stockAmount:0&wt=json').then(function successCallback(response) {
-                $http.get('http://search.mensmkt.com/solr/products/select?q=attr_value_garagem-id-do-usuario:'+ client +'&fq=stockAmount:0&wt=json').then(function successCallback(response) {
-                    if (response.data && response.data.response) {
-                        q.resolve(response.data.response.docs);
+                window.plugins.CordovaHttpPlugin.acceptAllCerts(true);
+                window.plugins.CordovaHttpPlugin.get('http://search.mensmkt.com/solr/products/select', {
+                    q: 'attr_value_garagem-id-do-usuario:'+ client,
+                    wt: 'json',
+                    fq: 'stockAmount:0',
+                    sort: 'nameSort asc'
+                }, {}, function(response) {
+                    if (response.data) {
+                        var json = JSON.parse(response.data);
+                        q.resolve(json.response.docs);
                     }
-                }, function errorCallback(response) {
-                    console.log(response);
+                }, function(err) {
+                    q.reject(err);
                 });
 
                 return q.promise;
@@ -61,13 +75,19 @@ angular.module('garagem')
             getForSaleProducts: function(client) {
                 var q = $q.defer();
 
-                //$http.get('http://search.mensmkt.com/solr/products/select?q=attr_value_garagem-id-do-usuario:22698&fq=stockAmount:[1%20TO%20*]&wt=json').then(function successCallback(response) {
-                $http.get('http://search.mensmkt.com/solr/products/select?q=attr_value_garagem-id-do-usuario:'+ client +'&fq=stockAmount:[1%20TO%20*]&wt=json').then(function successCallback(response) {
-                    if (response.data && response.data.response) {
-                        q.resolve(response.data.response.docs);
+                window.plugins.CordovaHttpPlugin.acceptAllCerts(true);
+                window.plugins.CordovaHttpPlugin.get('http://search.mensmkt.com/solr/products/select', {
+                    q: 'attr_value_garagem-id-do-usuario:'+ client,
+                    wt: 'json',
+                    fq: 'stockAmount:[1 TO *]',
+                    sort: 'nameSort asc'
+                }, {}, function(response) {
+                    if (response.data) {
+                        var json = JSON.parse(response.data);
+                        q.resolve(json.response.docs);
                     }
-                }, function errorCallback(response) {
-                    console.log(response);
+                }, function(err) {
+                    q.reject(err);
                 });
 
                 return q.promise;

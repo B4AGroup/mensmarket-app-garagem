@@ -1,0 +1,17 @@
+<ion-view title="Categoria">
+    <ion-nav-buttons side="right">
+        <button class="button" ng-if="allowToContinue">OK</button>
+    </ion-nav-buttons>
+    <ion-content class="padding">
+        <p class="x-padding text-center">Escolha a categoria na qual melhor se encaixa seu produto</p>
+        <ion-list ng-if="!loadingCategories">
+            <ion-item ng-repeat="(id, category) in categories" ng-click="showSubCategories({{id}})">
+                {{category.name}}
+                <span class="icon ion-ios-arrow-down pull-right"></span>
+            </ion-item>
+        </ion-list>
+        <p class="text-center">
+            <ion-spinner icon="ios" ng-if="loadingCategories"></ion-spinner>
+        </p>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,25 @@
+<ion-view title="Fotos">
+    <ion-content id="photo" class="padding" scroll="false">
+        <div class="wrapper">
+            <p class="x-padding text-center">Adicione até 4 fotos do seu produto clicando em cada box</p>
+            <ul id="photo-list" class="row">
+                <li class="col col-25" ng-repeat="(index, value) in images" ng-if="value != 'empty'">
+                        <span class="placeholder" style="background-image:url({{value}})">
+                            <!--IMAGE PLACEHOLDER-->
+                            <button class="photo-remove button icon ion-close-circled"
+                                    ng-click="removePhoto({{$index}})"></button>
+                        </span>
+                </li>
+                <li class="col col-25" ng-repeat="(index, value) in images" ng-if="value == 'empty'">
+                    <span class="empty"></span>
+                        <span class="placeholder">
+                            <button class="photo-add button icon ion-plus-circled" ng-click="newPhoto()"></button>
+                        </span>
+                </li>
+            </ul>
+            <button type="submit" class="button button-block button-positive button-continue"
+                    ng-if="allowToContinue" ng-click="continue()">Continuar
+            </button>
+        </div>
+    </ion-content>
+</ion-view>

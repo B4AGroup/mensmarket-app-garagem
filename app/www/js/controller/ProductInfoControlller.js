@@ -3,13 +3,6 @@
  */
 angular.module('garagem')
     .controller('ProductInfoController', function ($scope, $rootScope, $state, $q, $ionicLoading, $ionicPopup, ProductService, ClientService) {
-        $scope.$on('$ionicView.beforeEnter', function () {
-            if (!ClientService.isLoggedIn()) {
-                $state.go('home');
-                return;
-            }
-        });
-
         var savedProduct = ProductService.getSavedProduct();
 
         if (null == savedProduct) {
@@ -23,8 +16,15 @@ angular.module('garagem')
         $scope.$watch('product', function (newProduct) {
             var _savedProduct = angular.extend(angular.copy(savedProduct), angular.copy(newProduct));
 
-            _savedProduct.price = parseFloat(_savedProduct.price.replace(/[^0-9,]+/g, '').replace(',', '.'));
-            _savedProduct.grossWeight = parseFloat(_savedProduct.grossWeight.replace(/[^0-9,]+/g, '').replace(',', '.'));
+            console.log(_savedProduct);
+
+            if (_savedProduct.price && typeof _savedProduct.price == 'string') {
+                _savedProduct.price = parseFloat(_savedProduct.price.replace(/[^0-9,]+/g, '').replace(',', '.'));
+            }
+
+            if (_savedProduct.grossWeight && typeof _savedProduct.grossWeight == 'string') {
+                _savedProduct.grossWeight = parseFloat(_savedProduct.grossWeight.replace(/[^0-9,]+/g, '').replace(',', '.'));
+            }
 
             ProductService.updateSavedProduct(_savedProduct);
         }, true);
@@ -71,13 +71,9 @@ angular.module('garagem')
             $q.all(promises).then(function () {
                 ProductService.upsert(newProduct).then(function () {
                     $ionicLoading.hide();
-
-                    navigator.notification.alert('Seu produto foi enviado com sucesso.', function() {
-                        $state.go('logged-home');
-                    }, 'Sucesso!');
+                    $state.go('success');
                 }, function (err) {
                     $ionicLoading.hide();
-
                     navigator.notification.alert('Ocorreu um erro ao tentar enviar seu produto. Por favor, tente novamente.', null, 'Ops! :(');
                 });
             }, function (err) {

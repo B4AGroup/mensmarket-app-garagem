@@ -1,0 +1,18 @@
+<ion-view hide-nav-bar="true">
+    <ion-content id="home" class="bg-garage text-shadow" scroll="false">
+        <div id="home-container">
+            <h1 id="logo">Garagem da Men's</h1>
+            <p class="description">Tá parado, pegando pó, ocupando espaço, mas tá novo, é bacana e ainda dá um caldo? Então bora vender aqui na <strong>Garagem da Men’s.</strong></p>
+
+            <div class="buttons fade" ng-show="!loggedIn" class="fade">
+                <button class="button button-block button-signin" ui-sref="signin" nav-transition="none">
+                    Entrar na Garagem
+                </button>
+                <button class="button button-block button-signup" ui-sref="signup">
+                    Criar uma conta
+                </button>
+            </div>
+            <ion-spinner icon="ios" ng-show="loggedIn"></ion-spinner>
+        </div>
+    </ion-content>
+</ion-view>

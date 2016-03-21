@@ -7,7 +7,7 @@ angular.module('garagem').factory('ProductService', function ($q, $http) {
     };
 
     function _getSavedProduct() {
-        var newProduct = localStorage.getItem('tempProduct');
+        var newProduct = localStorage.getItem('savedProduct');
         if (newProduct) {
             return JSON.parse(newProduct);
         }
@@ -16,11 +16,11 @@ angular.module('garagem').factory('ProductService', function ($q, $http) {
     }
 
     function _updateSavedProduct(product) {
-        localStorage.setItem('tempProduct', JSON.stringify(product));
+        localStorage.setItem('savedProduct', JSON.stringify(product));
     }
 
     function _deleteSavedProduct() {
-        localStorage.removeItem('tempProduct');
+        localStorage.removeItem('savedProduct');
     }
 
     return {

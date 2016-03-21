@@ -1,10 +1,4 @@
-angular.module('garagem').controller('PhotoController', function ($scope, $rootScope, $state, $ionicActionSheet, PhotoService, ClientService, ProductService) {
-    $scope.$on('$ionicView.beforeEnter', function () {
-        if (!ClientService.isLoggedIn()) {
-            $state.go('home');
-        }
-    });
-
+angular.module('garagem').controller('PhotoController', function ($scope, $rootScope, $state, $ionicActionSheet, $ionicPlatform, PhotoService, ClientService, ProductService) {
     var product = ProductService.getSavedProduct() || {};
     $scope.images = product.photos || {};
 
@@ -73,8 +67,8 @@ angular.module('garagem').controller('PhotoController', function ($scope, $rootS
         $ionicActionSheet.show({
             titleText: 'Opção de foto',
             buttons: [
-                {text: '<i class="icon ion-camera dark"></i>Câmera'},
-                {text: '<i class="icon ion-images dark"></i>Galeria'}
+                {text: (ionic.Platform.isAndroid() ? '<i class="icon ion-camera dark"></i>' : '') + 'Câmera'},
+                {text: (ionic.Platform.isAndroid() ? '<i class="icon ion-images dark"></i>' : '') + 'Galeria'}
             ],
             cancelText: 'Cancelar',
             cancel: function () {

@@ -1,0 +1,63 @@
+<ion-view title="Informações">
+    <ion-nav-buttons side="right">
+        <button class="button" ng-if="allowToContinue">OK</button>
+    </ion-nav-buttons>
+    <ion-content id="product-info">
+        <form name="info" ng-submit="submit(product)" novalidate>
+            <ion-slide-box>
+                <ion-slide class="photo-slide" ng-repeat="(key, photo) in product.photos">
+                    <div class="box">
+                        <img src="{{photo}}" style="max-width: 100%">
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+            <div class="list">
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Nome</span>
+                    <input type="text" placeholder="Ex: Celular Azul" ng-model="product.name" ng-trim="false"
+                           name="name" ng-required="true">
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Descrição</span>
+                        <textarea placeholder="Fale mais sobre o produto e por que você está querendo vender. Quanto mais detalhes der, mais chance de vender :)" ng-model="product.description" ng-trim="false"
+                                  name="description" ng-required="true"></textarea>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Preço</span>
+                    <input type="tel" placeholder="R$" ng-model="product.price" ng-trim="false" name="price"
+                           ng-required="true" ui-money-mask>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Marca</span>
+                    <input type="text" placeholder="Ex: Apple" ng-model="product.brand" ng-trim="false" name="brand"
+                           ng-required="true">
+                </label>
+                <label class="item item-input item-select">
+                    <span class="input-label">Condição</span>
+                    <select ng-model="product.physicalCondition" ng-trim="false" name="physicalCondition"
+                            ng-required="true">
+                        <option value="NEW">Novo</option>
+                        <option value="USED" selected>Usado</option>
+                    </select>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Peso aproximado (em gramas)</span>
+                    <input type="tel" placeholder="Ex: 100.0" ng-model="product.grossWeight"
+                           ng-trim="false"
+                           name="grossWeight" ng-required="true" ui-number-mask>
+                </label>
+                <label class="item item-input item-stacked-label">
+                    <span class="input-label">Seu CEP</span>
+                    <input type="tel" placeholder="Ex: 01001-001" ng-model="product.originZipCode"
+                           ng-trim="false"
+                           name="originZipCode" ng-required="true" ui-br-cep-mask>
+                </label>
+            </div>
+            <button type="submit" class="button button-block button-positive" ng-disabled="info.$invalid">Continuar</button>
+            <p class="x-padding text-center">
+                Ao enviar o produto, você aceita nossas<br>
+                <a ui-sref="rules">regras de uso</a>*
+            </p>
+        </form>
+    </ion-content>
+</ion-view>

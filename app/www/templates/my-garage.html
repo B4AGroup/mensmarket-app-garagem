@@ -1,0 +1,65 @@
+<ion-view title="Minha Garagem">
+    <ion-nav-title>Minha Garagem</ion-nav-title>
+    <ion-nav-buttons side="right">
+        <button class="button icon ion-help-circled" ui-sref="settings"></button>
+    </ion-nav-buttons>
+    <ion-content id="my-garage" scroll="false" class="flex padding">
+        <div class="header box">
+            <span class="client-photo" style="background-image:url({{client.image}})"></span>
+            <span>Garagem do {{client.name}}</span>
+        </div>
+        <div class="nav box">
+            <ul>
+                <li>
+                    <a class="item" ng-class="{active: selectedTab == 'forSaleProducts'}"
+                       ng-click="selectTab('forSaleProducts')">
+                        <span class="count" ng-show="!loading">{{forSaleProducts.length}}</span>
+                        <span class="count" ng-show="loading">0</span>
+                        À venda
+                    </a>
+                </li>
+                <li>
+                    <a class="item" ng-class="{active: selectedTab == 'soldProducts'}"
+                       ng-click="selectTab('soldProducts')">
+                        <span class="count" ng-show="!loading">{{soldProducts.length}}</span>
+                        <span class="count" ng-show="loading">0</span>
+                        Vendidos
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="products box">
+            <ion-spinner icon="ios" ng-show="loading"></ion-spinner>
+            <ion-scroll zooming="true" direction="y" ng-show="!loading">
+                <div class="for-sale-products" ng-show="selectedTab == 'forSaleProducts'">
+                    <p ng-show="forSaleProducts.length == 0" class="alert-message text-center">Você não possui produto à
+                        venda</p>
+
+                    <div class="row">
+                        <div class="product col col-50" ng-repeat="product in forSaleProducts">
+                                <span class="image"
+                                      style="background-image:url(https://v0.static.betalabs.com.br/uploads/gestao_ja/produto/produto_foto/thumb/178x178{{product.images[0]}})"></span>
+
+                            <p class="name">{{product.name}}</p>
+                            <span class="price">{{product.price | currency:"R$ "}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sold-products" ng-show="selectedTab == 'soldProducts'">
+                    <p ng-show="soldProducts.length == 0" class="alert-message text-center">Nenhum produto foi vendido até o
+                        momento</p>
+
+                    <div class="row">
+                        <div class="product col col-50" ng-repeat="product in soldProducts">
+                                <span class="image"
+                                      style="background-image:url(https://v0.static.betalabs.com.br/uploads/gestao_ja/produto/produto_foto/thumb/178x178{{product.images[0]}})"></span>
+
+                            <p class="name">{{product.name}}</p>
+                            <span class="price">{{product.price | currency:"R$ "}}</span>
+                        </div>
+                    </div>
+                </div>
+            </ion-scroll>
+        </div>
+    </ion-content>
+</ion-view>

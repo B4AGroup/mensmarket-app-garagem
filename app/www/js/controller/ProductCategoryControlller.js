@@ -2,33 +2,26 @@
  * Created by lmiranda on 3/1/16.
  */
 angular.module('garagem')
-    .controller('ProductCategoryController', function ($scope, $rootScope, $state, $ionicModal, $ionicLoading, SolrService, ProductService, ClientService) {
-        $scope.$on('$ionicView.beforeEnter', function() {
-            if (!ClientService.isLoggedIn()) {
-                $state.go('home');
-                return;
-            }
-        });
-
+    .controller('ProductCategoryController', function ($scope, $rootScope, $state, $ionicModal, $ionicLoading, $timeout, SolrService, ProductService, ClientService) {
         var savedProduct = ProductService.getSavedProduct();
+
+        $scope.$on('$ionicView.beforeEnter', function () {
+            $scope.loadingCategories = true;
+        });
 
         if (null == savedProduct) {
             $state.go('home');
             return;
         }
 
-        console.info(savedProduct);
+        $timeout(function () {
+            SolrService.getCategories().then(function (categories) {
+                $scope.loadingCategories = false;
+                $scope.categories = categories;
+            });
+        }, 100);
 
-        $ionicLoading.show({
-            template: 'Carregando...'
-        });
-
-        SolrService.getCategories().then(function (categories) {
-            $scope.categories = categories;
-            $ionicLoading.hide();
-        });
-
-        $ionicModal.fromTemplateUrl('subcategory-modal.html', {
+        $ionicModal.fromTemplateUrl('templates/subcategory-modal.html', {
             scope: $scope,
             animation: 'slide-in-up'
         }).then(function (modal) {

@@ -76,40 +76,99 @@ ion-content {
 .spinner svg {
     width: 28px;
     height: 28px;
-    stroke: #fff;
-    fill: #fff;
+    stroke: #484c55;
+    fill: #484c55;
 }
 
 .bar {
     &.bar-garagem {
-        height: 54px !important;
-
         @extend .bar-dark;
 
         .title {
             color: #fff;
-            height: 54px;
-            line-height: 54px;
             text-transform: uppercase;
+        }
+
+        .button {
+            background-color: transparent !important;
         }
     }
 }
 
+.x-padding {
+    padding: 16px;
+}
+
+.garagem-tip {
+    @extend .x-padding;
+
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+
+    a {
+        white-space: nowrap;
+    }
+}
+
 [nav-bar-transition="ios"] [nav-bar="active"] .bar, [nav-bar-transition="ios"] [nav-bar="entering"] .bar {
-    background-color: #646f75 !important;
+    background-color: #484c55 !important;
     border: none;
     color: #fff;
 }
 
-.has-header {
-    top: 54px;
+.back-text {
+    display: none !important;
+}
+
+.platform-ios {
+    .bar-header {
+        height: 70px !important;
+
+        .title {
+            height: 50px;
+            line-height: 50px;
+        }
+    }
+
+    .has-header {
+        top: 70px !important;
+    }
+}
+
+.platform-android {
+    .bar-header {
+        height: 54px !important;
+
+        .title {
+            height: 54px;
+            line-height: 54px;
+        }
+    }
+
+    .has-header {
+        top: 54px !important;
+    }
 }
 
 .popover {
     height: 111px;
 
     .has-header {
-        top: 0;
+        top: 0 !important;
+    }
+}
+
+.platform-ios {
+    &.platform-cordova .popover {
+        .has-header {
+            top: 0;
+        }
+
+        .bar-header:not(.bar-subheader) {
+            top: 0;
+        }
     }
 }
 
@@ -129,6 +188,7 @@ ion-content {
 .bg-garage {
     background: url('../img/bg.jpg') no-repeat 50%;
     background-size: cover;
+    background-attachment: fixed;
     color: #fff;
 }
 
@@ -152,6 +212,12 @@ ion-content {
     height: 20vw;
     margin-bottom: 10px;
     width: 20vw;
+
+    @media all and (max-height: 480px) {
+        height: 15vw;
+        margin-bottom: 5px;
+        width: 15vw;
+    }
 }
 
 .text-shadow {
@@ -163,9 +229,9 @@ ion-content {
     text-align: center;
 
     .description {
-        height: 10vh;
-        font-size: 1.3em;
-        line-height: 1em;
+        font-size: 1em;
+        line-height: 1.5;
+        min-height: 12vh;
     }
 
     .buttons {
@@ -181,7 +247,8 @@ ion-content {
         }
 
         .button-signup {
-            background-color: #bfbfbf;
+            background-color: #fff;
+            color: #484c55;
         }
     }
 
@@ -200,22 +267,23 @@ ion-content {
     input {
         background-color: transparent;
         border-bottom: .3vh solid #fff;
+        border-radius: 0;
         box-sizing: border-box;
         color: #fff;
         font-size: 18px;
-        margin-bottom: 2vw;
+        margin-bottom: 2vh;
         padding: 25px 20px;
         width: 100%;
     }
 
     .description {
-        height: 10vw;
+        height: 10vh;
     }
 
     .button-signin {
         background-color: #3aa0f7;
         color: #fff;
-        margin-top: 20vw;
+        margin-top: 8vh;
     }
 
     ::-webkit-input-placeholder {
@@ -242,7 +310,7 @@ ion-content {
     background: url('../img/logo.png') no-repeat 50%;
     background-size: contain;
     overflow: hidden;
-    height: 25vh;
+    height: 23vh;
     margin: 0 auto 5vh;
     text-indent: -90000px;
 }
@@ -251,8 +319,8 @@ ion-content {
     background: url('../img/logo-small.png') no-repeat 50%;
     background-size: contain;
     overflow: hidden;
-    height: 66%;
-    margin: 8px 0px;
+    height: 50%;
+    margin: 13px 0px;
     text-indent: -90000px;
 }
 
@@ -265,6 +333,15 @@ ion-content {
         font-size: 1.2em;
         line-height: 1.5em;
 
+        a {
+            color: #484c55;
+            display: block;
+
+            p {
+                font-size: 15px;
+                line-height: 1.3;
+            }
+        }
     }
 
     .box {
@@ -281,11 +358,65 @@ ion-content {
         border-bottom: 5px solid #fff;
         color: #fff;
 
+        > div {
+            border: 1px solid #fff;
+            padding: 10px 20px;
+            width: 60%;
+        }
+
         h2 {
             color: #fff;
             display: block;
+            font-size: 20px;
             margin-bottom: 0;
         }
+    }
+}
+
+#settings {
+    .header {
+        background: url('../img/logo-icon.png') no-repeat 50% 20px;
+        background-size: 40px auto;
+        padding-top: 70px;
+
+        strong {
+            display: block;
+        }
+    }
+
+    .logout {
+        margin-top: 5vh;
+        text-align: center;
+    }
+
+    @media all and (max-height: 480px) {
+        .garagem-tip {
+            bottom: auto;
+            position: relative;
+        }
+    }
+}
+
+#rules {
+    color: #484c55;
+
+    p {
+        margin-bottom: 30px;
+    }
+
+    .header {
+        text-align: center;
+
+        .logo {
+            background: url('../img/logo-icon.png') no-repeat 50%;
+            display: block;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+    }
+
+    .footer {
+        text-align: center;
     }
 }
 
@@ -300,6 +431,10 @@ ion-content {
 }
 
 #my-garage {
+    ion-scroll {
+        width: 100%;
+    }
+
     .header {
         flex: 1;
         font-size: 18px;
@@ -401,6 +536,18 @@ ion-content {
     }
 }
 
+#photo {
+    .wrapper {
+        height: 100%;
+        position: relative;
+    }
+
+    .button-continue {
+        bottom: 0;
+        position: absolute;
+    }
+}
+
 #photo-list {
     li {
         text-align: center;
@@ -470,11 +617,41 @@ ion-content {
     button[type="submit"] {
         border-radius: 0;
     }
+}
 
-    //.ng-invalid {
-    //    textarea, input {
-    //        border-left: 2px solid red;
-    //    }
-    //}
+#success {
+    text-align: center;
+
+    .header {
+        background: url('../img/logo-icon.png') no-repeat 50% 0;
+        background-size: 40px auto;
+        margin: 5vh 0;
+        padding-top: 60px;
+        position: relative;
+
+        .ion-checkmark-circled {
+            color: #b9f437;
+            font-size: 25px;
+            position: absolute;
+            top: 27px;
+            display: block;
+            height: 25px;
+            background-color: #fff;
+            left: 50%;
+            border-radius: 100%;
+            margin-left: 9px;
+            width: 25px;
+        }
+
+        strong {
+            display: block;
+        }
+    }
+
+    .sell-more {
+        a {
+            margin-top: 20px;
+        }
+    }
 }
 

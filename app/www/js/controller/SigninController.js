@@ -1,7 +1,7 @@
 /**
  * Created by lmiranda on 3/1/16.
  */
-angular.module('garagem').controller('SigninController', function ($scope, $state, $ionicHistory, ClientService) {
+angular.module('garagem').controller('SigninController', function ($scope, $state, $ionicHistory, $timeout, ClientService) {
     function onSigninSuccess(client) {
         $ionicHistory.nextViewOptions({
             historyRoot: true
@@ -26,6 +26,8 @@ angular.module('garagem').controller('SigninController', function ($scope, $stat
 
     $scope.signin = function (client) {
         $scope.loading = true;
+
+        document.body.blur();
 
         ClientService.signin(client.email, client.password).then(onSigninSuccess, onSigninError);
     };

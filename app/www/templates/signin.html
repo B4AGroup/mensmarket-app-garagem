@@ -1,0 +1,22 @@
+<ion-view hide-nav-bar="true">
+    <ion-content id="signin" class="bg-garage" overflow-scroll="false">
+        <div id="signin-container">
+            <h1 id="logo">Garagem da Men's</h1>
+
+            <div ng-show="!loading">
+                <p class="description">
+                    Entre com seu usuário e senha da Men's
+                </p>
+
+                <form name="signinForm" id="sigin-form" ng-submit="signin(client)">
+                    <input type="email" placeholder="E-mail" ng-trim="false" ng-model="client.email" name="email" ng-required="true">
+                    <input type="password" placeholder="Senha" ng-trim="false" ng-model="client.password"
+                           name="password" ng-required="true">
+                    <button type="submit" class="button button-block button-signin" ng-disabled="signinForm.$invalid">Entrar na Garagem</button>
+                </form>
+            </div>
+
+            <ion-spinner icon="ios" ng-show="loading"></ion-spinner>
+        </div>
+    </ion-content>
+</ion-view>
