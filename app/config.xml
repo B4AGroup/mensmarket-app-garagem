@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget android-versionCode="14" id="br.com.mensmarket.garagem" ios-CFBundleVersion="14" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-versionCode="16" id="br.com.mensmarket.garagem" ios-CFBundleVersion="16" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Garagem da Men´s</name>
   <description></description>
   <author email="atendimento@mensmarket.com.br" href="https://www.mensmarket.com.br">Men´s Market</author>
