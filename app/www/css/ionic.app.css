@@ -10017,20 +10017,21 @@ ion-content {
   background: url("../img/home/bg-garage.png") no-repeat 50%;
   background-size: cover; }
 
-#my-garage ion-scroll {
-  width: 100%; }
-
 #my-garage .header {
-  flex: 1;
   font-size: 18px;
+  max-height: 72px;
+  min-height: 72px;
   justify-content: flex-start; }
   #my-garage .header .client-photo {
+    height: 72px;
     margin-bottom: 0;
-    margin-right: 10px; }
+    margin-right: 10px;
+    width: 72px; }
 
 #my-garage .nav {
   align-items: flex-start;
-  flex: 1; }
+  max-height: 95px;
+  min-height: 95px; }
   #my-garage .nav ul {
     border-bottom: .4vh solid #bfbfbf;
     display: table;
@@ -10038,7 +10039,8 @@ ion-content {
     #my-garage .nav ul li {
       display: table-cell;
       position: relative;
-      text-align: center; }
+      text-align: center;
+      width: 50%; }
       #my-garage .nav ul li:after {
         border-right: .3vw solid #bfbfbf;
         content: ' ';
@@ -10066,7 +10068,10 @@ ion-content {
 
 #my-garage .products {
   align-items: flex-start;
-  flex: 4; }
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; }
+  #my-garage .products .spinner {
+    margin: 20px 0; }
   #my-garage .products .row {
     flex-wrap: wrap; }
   #my-garage .products .product .image {

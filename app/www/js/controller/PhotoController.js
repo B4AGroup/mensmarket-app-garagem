@@ -1,5 +1,5 @@
 angular.module('garagem').controller('PhotoController', function ($scope, $rootScope, $state, $ionicActionSheet, $ionicPlatform, PhotoService, ClientService, ProductService) {
-    var product = ProductService.getSavedProduct() || {};
+    var     product = ProductService.getSavedProduct() || {};
     $scope.images = product.photos || {};
 
     $scope.allowNewPhotos = true;

@@ -431,24 +431,24 @@ ion-content {
 }
 
 #my-garage {
-    ion-scroll {
-        width: 100%;
-    }
-
     .header {
-        flex: 1;
         font-size: 18px;
+        max-height: 72px;
+        min-height: 72px;
         justify-content: flex-start;
 
         .client-photo {
+            height: 72px;
             margin-bottom: 0;
             margin-right: 10px;
+            width: 72px;
         }
     }
 
     .nav {
         align-items: flex-start;
-        flex: 1;
+        max-height: 95px;
+        min-height: 95px;
 
         ul {
             border-bottom: .4vh solid #bfbfbf;
@@ -459,6 +459,7 @@ ion-content {
                 display: table-cell;
                 position: relative;
                 text-align: center;
+                width: 50%;
 
                 &:after {
                     border-right: .3vw solid #bfbfbf;
@@ -501,7 +502,12 @@ ion-content {
 
     .products {
         align-items: flex-start;
-        flex: 4;
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+
+        .spinner {
+            margin: 20px 0;
+        }
 
         .row {
             flex-wrap: wrap;

@@ -1,4 +1,4 @@
-<ion-view title="Minha Garagem">
+<ion-view title="Minha Garagem" scroll="false">
     <ion-nav-title>Minha Garagem</ion-nav-title>
     <ion-nav-buttons side="right">
         <button class="button icon ion-help-circled" ui-sref="settings"></button>
@@ -29,8 +29,8 @@
             </ul>
         </div>
         <div class="products box">
-            <ion-spinner icon="ios" ng-show="loading"></ion-spinner>
-            <ion-scroll zooming="true" direction="y" ng-show="!loading">
+            <ion-spinner class="spinner" icon="ios" ng-show="loading"></ion-spinner>
+            <div ng-show="!loading">
                 <div class="for-sale-products" ng-show="selectedTab == 'forSaleProducts'">
                     <p ng-show="forSaleProducts.length == 0" class="alert-message text-center">Você não possui produto à
                         venda</p>
@@ -46,7 +46,8 @@
                     </div>
                 </div>
                 <div class="sold-products" ng-show="selectedTab == 'soldProducts'">
-                    <p ng-show="soldProducts.length == 0" class="alert-message text-center">Nenhum produto foi vendido até o
+                    <p ng-show="soldProducts.length == 0" class="alert-message text-center">Nenhum produto foi vendido
+                        até o
                         momento</p>
 
                     <div class="row">
@@ -59,7 +60,7 @@
                         </div>
                     </div>
                 </div>
-            </ion-scroll>
+            </div>
         </div>
     </ion-content>
 </ion-view>

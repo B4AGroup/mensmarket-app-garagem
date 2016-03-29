@@ -6,61 +6,60 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 
-angular.module('garagem', ['ionic', 'ui.utils.masks', 'ngAnimate', 'ngPassword']).run(function ($rootScope, $ionicPlatform, $ionicHistory, $state, $ionicViewSwitcher, ClientService) {
-    $ionicPlatform.registerBackButtonAction(function () {
-        var currentStateName = $ionicHistory.currentStateName();
+angular.module('garagem', ['ionic', 'ui.utils.masks', 'ngAnimate', 'ngPassword']).run(function ($rootScope, $ionicPlatform, $ionicHistory, $state, $ionicViewSwitcher) {
+    $rootScope.applicationReady = false;
 
-        switch (currentStateName) {
-            case 'home':
-            case 'logged-home':
-                navigator.app.exitApp();
-                break;
+    function registerBackButtonAction() {
+        $ionicPlatform.registerBackButtonAction(function () {
+            var currentStateName = $ionicHistory.currentStateName();
 
-            case 'success':
-            case 'product-photo':
-                $ionicViewSwitcher.nextDirection('back');
-                $state.go('logged-home');
-                break;
+            switch (currentStateName) {
+                case 'home':
+                case 'logged-home':
+                    navigator.app.exitApp();
+                    break;
 
-            default:
-                $ionicHistory.goBack(-1);
-                break;
-        }
-    }, 100);
+                case 'success':
+                case 'product-photo':
+                    $ionicViewSwitcher.nextDirection('back');
+                    $state.go('logged-home');
+                    break;
 
-    $rootScope.$on('$ionicView.beforeEnter', function (event) {
-        event.preventDefault();
-
-        if ($state.$current.data && $state.$current.data.requiredClient && !ClientService.isLoggedIn()) {
-            $ionicViewSwitcher.nextDirection('none');
-            $state.go('home')
-        }
-    });
+                default:
+                    $ionicHistory.goBack(-1);
+                    break;
+            }
+        }, 100);
+    }
 
     $ionicPlatform.ready(function () {
+        registerBackButtonAction();
+
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
             cordova.plugins.Keyboard.disableScroll(false);
         }
 
         if (window.StatusBar) {
-            StatusBar.styleLightContent();
+            StatusBar.styleLightContent()
         }
 
         $ionicViewSwitcher.nextDirection('none');
 
-        if (!ClientService.isLoggedIn()) {
-            $state.go('home');
-        } else {
-            $state.go('logged-home');
-        }
+        setTimeout(function () {
+            $rootScope.applicationReady = true;
+            $rootScope.$broadcast('applicationReady');
+        }, 500);
+    }).then(function () {
+        navigator.splashscreen.hide();
     });
 
 }).config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('loading', {
             url: '/loading',
-            templateUrl: 'templates/loading.html'
+            templateUrl: 'templates/loading.html',
+            controller: 'LoadingController'
         })
 
         .state('home', {
@@ -136,9 +135,9 @@ angular.module('garagem', ['ionic', 'ui.utils.masks', 'ngAnimate', 'ngPassword']
             templateUrl: 'templates/product-category.html',
             controller: 'ProductCategoryController',
             cache: false,
-            //data: {
-            //    requiredClient: true
-            //}
+            data: {
+                requiredClient: true
+            }
         })
 
         .state('product-info', {

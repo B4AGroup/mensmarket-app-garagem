@@ -42,7 +42,8 @@ angular.module('garagem')
             };
 
             newProduct.client = {
-                id: $scope.client.id
+                id: $scope.client.id,
+                idAlias: $scope.client.idAlias
             };
 
             newProduct.stockAmount = 1;
@@ -69,6 +70,8 @@ angular.module('garagem')
             }
 
             $q.all(promises).then(function () {
+                console.log(newProduct);
+
                 ProductService.upsert(newProduct).then(function () {
                     $ionicLoading.hide();
                     $state.go('success');
